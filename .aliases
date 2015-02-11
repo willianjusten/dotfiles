@@ -15,8 +15,8 @@ alias g="git"
 alias h="history"
 alias sqlinit="mysql.server start"
 alias sqlstop="mysql.server stop"
-alias mgi="mongod"
 alias mg="mongo"
+alias mg.start="mongod"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
