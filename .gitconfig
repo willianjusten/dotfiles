@@ -21,6 +21,9 @@
 
     # Push in remote changes
     ps = push origin master
+    
+    # Pull from remote with rebase
+    pr = pull --rebase
 
     # Clone a repository including all submodules
     c = clone --recursive
