@@ -7,16 +7,12 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
 alias dev="cd ~/Development"
 alias g="git"
 alias h="history"
 alias sqlinit="mysql.server start"
 alias sqlstop="mysql.server stop"
-alias mg="mongo"
-alias mg.start="mongod"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
