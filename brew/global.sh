@@ -1,19 +1,20 @@
 source common/functions.sh
 
 # homebrew
-if which node &> /dev/null; then
-    msg_checking "node"
-else
-    msg_install "Node" "brew install node"
-    brew install node
-    ok "OK"
-fi
-# homebrew
 if which brew &> /dev/null; then
     msg_checking "homebrew"
 else
     msg_install "Homebrew" "ruby -e $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ok "OK"
+fi
+
+# node
+if which node &> /dev/null; then
+    msg_checking "node"
+else
+    msg_install "Node" "brew install node"
+    brew install node
     ok "OK"
 fi
 
