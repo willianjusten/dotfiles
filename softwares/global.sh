@@ -26,4 +26,5 @@ brew cask install vlc 2> /dev/null
 brew cask install transmission 2> /dev/null
 brew cask install spotify 2> /dev/null
 brew cask install slack 2> /dev/null
+brew cask install franz 2> /dev/null
 brew cask install coconutbattery 2> /dev/null
