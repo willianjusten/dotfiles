@@ -29,3 +29,4 @@ brew cask install slack 2> /dev/null
 brew cask install franz 2> /dev/null
 brew cask install coconutbattery 2> /dev/null
 brew cask install screenhero 2> /dev/null
+brew cask install zoomus 2> /dev/null
