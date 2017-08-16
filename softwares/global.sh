@@ -15,6 +15,8 @@ brew cleanup
 # browsers
 brew cask install firefox 2> /dev/null
 brew cask install google-chrome 2> /dev/null
+brew cask install opera 2> /dev/null
+brew cask install opera-neon 2> /dev/null
 
 # dev apps
 brew cask install imageoptim 2> /dev/null
