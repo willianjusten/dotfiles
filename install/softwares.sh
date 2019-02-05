@@ -1,7 +1,9 @@
 #!/bin/sh
 
+source colors.sh
+
 #  Brew Cask ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-echo "Installing apps with brew cask"
+msg_install "Installing apps with brew cask"
 brew cask
 
 cask=(
@@ -19,6 +21,7 @@ cask=(
 )
 
 for app in "${cask[@]}"; do
-  echo "Installing $app"
+  msg_install "Installing $app"
   brew cask install $app
+  msg_ok "$app"
 done

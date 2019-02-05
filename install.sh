@@ -5,9 +5,9 @@ source colors.sh
 DOTFILES="$HOME/Development/dotfiles"
 
 if [[ -d $DOTFILES ]]; then
-    msg_checking 'Checking dotfiles directory'
+    print 'Checking dotfiles directory'
 else
-    msg_install 'Cloning dotfiles'
+    print 'Cloning dotfiles'
     git clone https://github.com/willianjusten/dotfiles.git $DOTFILES
 fi
 
