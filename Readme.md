@@ -5,9 +5,5 @@
 ###Installation
 
 ```bash
-git clone https://github.com/willianjusten/dotfiles.git && cd dotfiles
-
-source bootstrap.sh
-
-./install-main.sh
+curl -L https://raw.github.com/willianjusten/dotfiles/master/install.sh | bash
 ```
