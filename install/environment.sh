@@ -21,3 +21,7 @@ brew=(
   "git"
   "hub"
 )
+
+echo "Setting up pip and awscli"
+sudo easy_install pip
+pip install awscli --upgrade --user
