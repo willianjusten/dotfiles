@@ -1,8 +1,8 @@
-#My dotfiles
+# My dotfiles
 
 > These are my dotfiles, inspired by [Mathias dotfiles](https://github.com/mathiasbynens/dotfiles).
 
-###Installation
+### Installation
 
 ```bash
 curl -L https://raw.github.com/willianjusten/dotfiles/master/install.sh | bash
