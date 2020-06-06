@@ -20,9 +20,6 @@ alias bsw="browser-sync --server --watch"
 alias bf="cd ~/Development/toptal/blackfish"
 alias plat="cd ~/Development/toptal/platform"
 alias es="bundle exec rake es:start"
-alias topr="bundle exec rails s"
-alias topy="yarn start"
-alias topm="bundle exec rake db:migrate RAILS_ENV=development"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
