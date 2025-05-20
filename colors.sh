@@ -12,10 +12,9 @@
 #  37  # White   #
 ##################
 
-function print { echo -e "\033[1;32m=> $1\033[0m"; }
-function msg_checking { echo -e "\033[1;32m[ok] $1 ✔\033[0m"; }
+function msg_checking { echo -e "\033[1;32m[cheking] $1 ✔\033[0m"; }
 function msg_update { echo -e "\033[1;33m[update] $1 \033[0m"; }
 function msg_install { echo -e "\033[1;33m[installing] $1 \033[0m"; }
 function msg_ok { echo -e "\033[1;32m[installed] $1 ✔\033[0m"; }
-function msg { echo -e "\033[0;36m$1\033[0m"; }
 function msg_alert { echo -e "\033[1;31m[alert] ✖ $1 ✖\033[0m"; }
+function msg { echo -e "\033[0;36m$1\033[0m"; }
