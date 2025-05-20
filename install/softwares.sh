@@ -20,6 +20,6 @@ cask=(
 
 for app in "${cask[@]}"; do
   msg_install "Installing $app"
-  brew cask install $app
-  msg_ok "$app"
+  brew install --cask $app
+  msg_ok "$app installed"
 done
