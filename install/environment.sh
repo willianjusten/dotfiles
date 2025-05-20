@@ -38,13 +38,21 @@ if (test ! -d $HOME/.oh-my-zsh); then
   msg_install "Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-  # Install plugins
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
   msg_ok "oh-my-zsh installed"
 else
   msg_alert "oh-my-zsh already installed"
+fi
+
+# oh-my-zsh plugins
+if (test ! -d $HOME/.oh-my-zsh); then
+  msg_install "Installing oh-my-zsh plugins"
+
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+  msg_ok "oh-my-zsh installed with plugins"
+else
+  msg_alert "oh-my-zsh already installed with plugins"
 fi
 
 

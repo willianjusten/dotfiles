@@ -1,18 +1,11 @@
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="af-magic"
-
-# Fix lint-staged spinners and colors
-export FORCE_COLOR=1
-
-# Path to oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Path sourses
-source $ZSH/oh-my-zsh.sh
-source $HOME/.aliases
 
 # Zsh plugins
 plugins=(
@@ -20,6 +13,10 @@ plugins=(
   zsh-syntax-highlighting 
   zsh-autosuggestions
 )
+
+# Path sourses
+source $ZSH/oh-my-zsh.sh
+source $HOME/.aliases
 
 # Zsh history settings
 export HISTFILESIZE=1000000000
