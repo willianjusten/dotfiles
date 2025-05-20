@@ -3,7 +3,6 @@
   email = willianjusten@gmail.com
   initials = wj
 [core]
-  editor = cursor -w
   excludesfiles = ~/.gitignore
 [branch]
   autosetuprebase = always
