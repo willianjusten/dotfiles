@@ -11,6 +11,6 @@ fi
 
 cd $DOTFILES
 
-source install/applications.sh
+source install/environment.sh
 source install/softwares.sh
 source install/settings.sh
