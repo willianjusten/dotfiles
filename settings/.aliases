@@ -1,0 +1,22 @@
+# Aliases
+
+# IP addresses
+alias external-ip='curl -4 icanhazip.com'
+alias local-ip='ipconfig getifaddr en0'
+alias flushdns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
+
+# Folder aliases
+alias dev='~/Developer'
+alias courses='~/Developer/courses'
+alias github='~/Developer/github'
+
+# Command aliases
+alias sz='source ~/.zshrc'
+
+# Show/hide hidden files in Finder
+alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'

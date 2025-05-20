@@ -1,0 +1,62 @@
+[user]
+  name = Willian Justen
+  email = willianjusten@gmail.com
+  initials = wj
+[core]
+  editor = cursor -w
+  excludesfiles = ~/.gitignore
+[branch]
+  autosetuprebase = always
+  sort = -committerdate
+[alias]
+  ba = branch -a
+  bd = branch -D
+  bm = branch -m
+  cm = commit -m
+  co = checkout
+  cb = checkout -b
+  sw = switch
+  sc = switch -c
+  su = stash -u
+  sa = stash apply
+  sp = stash pop
+  st = status -s
+  ca = !git add -A && git commit -m
+  sg = !git add -A && git stash
+  sf = show --name-only
+  lg = log --oneline --decorate --pretty=format:'%C(yellow)%h%C(red)%d %C(white)%s %C(blue)<%cn> %C(green)(%cr - %C(green)%ad)' --date=local
+  pf = push -f
+  pl = push --force-with-lease
+  no-edit = commit --no-edit
+  amend = !git commit --amend --no-edit
+  clear = !git fetch origin && git reset --hard origin/$(git symbolic-ref --short HEAD)
+  undo = reset --soft HEAD^
+  unstage = reset HEAD --
+  rollback = checkout .
+  count = rev-list --count HEAD
+  clear-branches = !git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
+[color]
+  ui = true
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+[color "branch"]
+  current = white
+  local = green
+  remote = red
+[color "diff"]
+  meta = yellow
+  old = red
+  new = green
+[init]
+  defaultBranch = main
+[fetch]
+	prune = true
+[push]
+  default = current
+[pull]
+  default = current
+  rebase = true
+[merge]
+  log = true

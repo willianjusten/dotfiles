@@ -2,31 +2,59 @@
 
 source colors.sh
 
-# Brew ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# Brew
 msg_install "Setting up Homebrew"
 if test ! $(which brew); then
   msg_install "Installing homebrew"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  msg_ok 'Homebrew'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  msg_ok 'Homebrew installed'
+  exec "$SHELL"
 else
-  msg_alert "Homebrew already instaled"
-  msg_update "Updating Homebrew"
-  brew update
+  msg_alert "Homebrew already installed"
 fi
 
-# Brew apps :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+msg_update "Updating Homebrew"
+brew update
+brew upgrade
+
+# Brew apps
 msg_install "Installing apps with brew"
-brew=(
-  "rbenv"
-  "git"
-  "hub"
-)
+brew cleanup
+brew tap buo/cask-upgrade
+brew install \
+  asdf \
+  bat \
+  curl \
+  gh \
+  git \
+  httpie \
+  tree \
+  wget \
+  zsh
+msg_ok "Apps installed"
 
-msg_install "Setting up pip and awscli"
-sudo easy_install pip
-pip install awscli --upgrade --user
+# oh-my-zsh
+if (test ! -d $HOME/.oh-my-zsh); then
+  msg_install "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# NVM :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-msg_install "Installing NVM"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-msg_ok "NVM Installed"
+  # Install plugins
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+  msg_ok "oh-my-zsh installed"
+else
+  msg_alert "oh-my-zsh already installed"
+fi
+
+
+# Node.js with asdf
+if (test ! -d $HOME/.asdf/shims/node); then
+  msg_install "Installing Node.js"
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf install nodejs latest
+  asdf set -u nodejs latest
+  msg_ok "Node.js installed"
+else
+  msg_alert "Node.js already installed"
+fi

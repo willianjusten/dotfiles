@@ -17,4 +17,4 @@ source install/environment.sh
 
 source install/softwares.sh
 
-source config/global.sh
+source install/settings.sh

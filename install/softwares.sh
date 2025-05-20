@@ -7,17 +7,15 @@ msg_install "Installing apps with brew cask"
 brew cask
 
 cask=(
+  "cursor"
+  "discord"
+  "ghostty"
   "google-chrome"
-  "firefox"
-  "iterm2"
-  "visual-studio-code"
-  "psequel"
-  "transmission"
-  "stremio"
-  "spotify"
-  "coconutbattery"
-  "zoomus"
   "handbrake"
+  "raycast"
+  "transmission"
+  "visual-studio-code"
+  "yaak"
 )
 
 for app in "${cask[@]}"; do
