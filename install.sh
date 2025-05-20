@@ -2,7 +2,7 @@
 
 source colors.sh
 
-DOTFILES="$HOME/Development/dotfiles"
+DOTFILES="$HOME/Developer/dotfiles"
 
 if [[ -d $DOTFILES ]]; then
     print 'Checking dotfiles directory'
