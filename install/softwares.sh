@@ -14,6 +14,8 @@ cask=(
   "raycast"
   "transmission"
   "visual-studio-code"
+  "imageOptim"
+  "capcut"
   "yaak"
 )
 
