@@ -72,3 +72,12 @@ else
 fi
 ln -sf $DOTFILES/settings/.zshrc $HOME/
 msg_checking ".zshrc"
+
+# Agent skills and Claude Code config (repo is private: needs GitHub SSH access)
+AGENT_SKILLS="$HOME/Developer/agent-skills"
+if [ ! -d "$AGENT_SKILLS" ]; then
+  msg_install "agent-skills"
+  git clone git@github.com:willianjusten/agent-skills.git "$AGENT_SKILLS"
+fi
+"$AGENT_SKILLS/install.sh"
+msg_checking "agent-skills"
