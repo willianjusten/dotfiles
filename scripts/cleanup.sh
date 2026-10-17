@@ -125,7 +125,7 @@ fi
 echo
 echo "== 3. Apps and Homebrew packages no longer used"
 unused_casks=()
-while IFS= read -r cask; do unused_casks+=("$cask"); done < <(installed_packages cask zoom iterm2 visual-studio-code)
+while IFS= read -r cask; do unused_casks+=("$cask"); done < <(installed_packages cask zoom iterm2 visual-studio-code ghostty beekeeper-studio)
 if [ ${#unused_casks[@]} -gt 0 ] && confirm "brew uninstall --cask --zap ${unused_casks[*]} (also removes their settings and launch agents)?"; then
   brew uninstall --cask --zap --force "${unused_casks[@]}"
 fi

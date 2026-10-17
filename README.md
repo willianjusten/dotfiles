@@ -53,7 +53,7 @@ After the first apply, switch the repo remote to SSH to be able to push:
 
 | Item | Owner |
 |---|---|
-| zsh, git, npm/yarn auth, mise, Ghostty, Cursor settings | this repo |
+| zsh, git, npm/yarn auth, mise, Cursor settings | this repo |
 | Secrets (npm token, Spoke workspace tokens) | 1Password, read at apply time |
 | SSH keys and `~/.ssh/config` | the machine itself, not managed |
 | Spoke repos and their agent setup | Spoke workspace (see its README); chezmoi only adds mise Node pins |
