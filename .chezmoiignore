@@ -8,7 +8,8 @@ macos/
 scripts/
 
 {{- if not .use_1password }}
-.ssh/config
-.config/1Password
+# Without 1Password, leave existing secret files alone instead of dropping their tokens
+.npmrc
+.yarnrc.yml
 .spoke-env
 {{- end }}
