@@ -21,9 +21,13 @@ command -v op >/dev/null 2>&1 || brew install --cask 1password-cli
 if [ -t 0 ]; then
   cat <<'EOF'
 
-Before continuing (skip if you will answer "no" to the 1Password prompt):
-  1. Open 1Password and sign in to the Spoke account
-  2. Settings > Developer: turn on "Integrate with 1Password CLI"
+Before continuing:
+  1. System Settings > Privacy & Security > App Management: turn on this terminal app,
+     then quit and reopen it. Without it, Homebrew can't take over apps already in
+     /Applications ("chgrp: Operation not permitted", even with sudo).
+  2. Skip if you will answer "no" to the 1Password question:
+     open 1Password, sign in to the Spoke account, and turn on
+     Settings > Developer > "Integrate with 1Password CLI"
 
 EOF
   read -r -p "Press Enter to continue "

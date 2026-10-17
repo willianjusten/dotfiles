@@ -7,7 +7,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Installs and upgrades only; never uninstalls anything missing from the Brewfiles.
 # A failed entry (e.g. mas before App Store sign-in) only warns: exiting non-zero
 # here would stop chezmoi before it writes any file.
-for brewfile in "{{ .chezmoi.sourceDir }}/Brewfile" "{{ .chezmoi.sourceDir }}/Brewfile.{{ .machine }}"; do
+brewfiles=("{{ .chezmoi.sourceDir }}/Brewfile" "{{ .chezmoi.sourceDir }}/Brewfile.{{ .machine }}")
+
+# Homebrew 7 refuses to load formulae from a non-official tap until it is trusted;
+# listing a tap in a Brewfile is the decision to trust it
+grep -h '^tap ' "${brewfiles[@]}" | cut -d'"' -f2 | while IFS= read -r tap_name; do
+  brew trust --tap "$tap_name"
+done
+
+for brewfile in "${brewfiles[@]}"; do
   if ! brew bundle --file="$brewfile"; then
     echo "WARNING: some entries in $brewfile failed. Fix them, then run: brew bundle --file=$brewfile" >&2
   fi

@@ -15,7 +15,9 @@ Works on a new Mac and on one that already has config, repos and credentials.
    ```
 
    It installs Homebrew (with the Command Line Tools), chezmoi and 1Password if missing, then pauses.
-3. Open 1Password, sign in to the Spoke account, and turn on Settings > Developer >
+3. In System Settings > Privacy & Security > App Management, turn on your terminal app
+   and reopen it, so Homebrew can take over apps already in `/Applications`. Open
+   1Password, sign in to the Spoke account, and turn on Settings > Developer >
    "Integrate with 1Password CLI". Press Enter and answer its questions (machine as a
    numbered menu, git emails, 1Password); they are passed to `chezmoi init`.
 4. `scripts/backup.sh` then copies every file chezmoi will replace or remove to
