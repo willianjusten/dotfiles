@@ -2,7 +2,8 @@
 # Bootstrap a Mac, new or already set up: Homebrew (installs the Command Line Tools)
 # -> 1Password -> chezmoi init -> backup of files chezmoi will replace -> chezmoi apply.
 # bash -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
-# Extra arguments go to `chezmoi init`, e.g. --promptChoice machine=macbook
+# Extra arguments go to `chezmoi init`, e.g. --promptString 'Personal git email=me@example.com'
+# (chezmoi matches these flags by prompt text, not by data key)
 set -euo pipefail
 
 DOTFILES="$HOME/Developer/dotfiles"
@@ -25,13 +26,40 @@ Before continuing (skip if you will answer "no" to the 1Password prompt):
   2. Settings > Developer: turn on "Integrate with 1Password CLI"
 
 EOF
-  read -r -p "Press Enter to run chezmoi init "
+  read -r -p "Press Enter to continue "
 fi
 
-chezmoi init --source "$DOTFILES" "$@" willianjusten
+# Ask the chezmoi init questions here and pass the answers as flags: chezmoi's own
+# prompts skipped input in Ghostty. The prompt texts must match .chezmoi.toml.tmpl.
+# Once chezmoi.toml exists, the *Once prompts reuse its values and nothing is asked.
+init_answers=()
+if [ -t 0 ] && [ ! -f "$HOME/.config/chezmoi/chezmoi.toml" ]; then
+  echo "Which Mac is this?"
+  select machine in studio macbook; do
+    [ -n "$machine" ] && break
+  done
+  read -r -p "Personal git email: " personal_email
+  read -r -p "Spoke git email: " work_email
+  read -r -p "Read secrets from 1Password (app signed in with CLI integration on)? [Y/n] " use_1password
+  case "$use_1password" in [nN]*) use_1password=false ;; *) use_1password=true ;; esac
+  init_answers=(
+    --promptChoice "Which Mac is this=$machine"
+    --promptString "Personal git email=$personal_email"
+    --promptString "Spoke git email=$work_email"
+    --promptBool "Read secrets from 1Password (app signed in with CLI integration on)=$use_1password"
+    --promptString "Spoke 1Password sign-in address=spokedelivery.1password.com"
+  )
+fi
+
+chezmoi init --source "$DOTFILES" ${init_answers[@]+"${init_answers[@]}"} "$@" willianjusten
 "$DOTFILES/scripts/backup.sh"
 
 if [ -t 0 ]; then
-  read -r -p "Press Enter to apply (Ctrl+C to stop and review first) "
+  # A typed word, not Enter, so a stray newline left in the terminal can't start the apply
+  apply_answer=""
+  while [ "$apply_answer" != "apply" ]; do
+    read -r -p "Review the backup above, then type 'apply' to continue (Ctrl+C to stop): " apply_answer
+  done
 fi
-chezmoi apply -v
+# No pager: brew and the sudo steps prompt for a password, and less would take the keystrokes
+chezmoi apply -v --no-pager

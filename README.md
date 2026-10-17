@@ -16,12 +16,13 @@ Works on a new Mac and on one that already has config, repos and credentials.
 
    It installs Homebrew (with the Command Line Tools), chezmoi and 1Password if missing, then pauses.
 3. Open 1Password, sign in to the Spoke account, and turn on Settings > Developer >
-   "Integrate with 1Password CLI". Press Enter to run `chezmoi init` and answer its
-   prompts (machine, git emails, 1Password).
+   "Integrate with 1Password CLI". Press Enter and answer its questions (machine as a
+   numbered menu, git emails, 1Password); they are passed to `chezmoi init`.
 4. `scripts/backup.sh` then copies every file chezmoi will replace or remove to
    `~/.dotfiles-backup/<timestamp>/`, with a `changes.diff` of what changes in each
-   (secrets masked). Review it, press Enter to apply, and later move anything you
-   want to keep from the backup into the dotfiles.
+   (secrets masked). Review it, type `apply` to apply, and later move anything you
+   want to keep from the backup into the dotfiles. Homebrew and the firewall and
+   open-files steps ask for your password during the apply.
 5. Sign in to the App Store, then install the App Store apps:
    `brew bundle --file=~/Developer/dotfiles/Brewfile.mas`
 6. On a Mac that had the old setup, open a new shell and run `scripts/cleanup.sh`.
