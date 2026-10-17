@@ -1,14 +1,10 @@
 #!/bin/bash
-# Fresh-Mac bootstrap: Xcode CLT -> Homebrew -> 1Password -> chezmoi init --apply.
+# Fresh-Mac bootstrap: Homebrew (installs the Command Line Tools) -> 1Password -> chezmoi init --apply.
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
+# Extra arguments go to `chezmoi init`, e.g. --promptChoice machine=macbook
 set -euo pipefail
 
 DOTFILES="$HOME/Developer/dotfiles"
-
-if ! xcode-select -p >/dev/null 2>&1; then
-  xcode-select --install
-  read -r -p "Finish the Command Line Tools install, then press Enter "
-fi
 
 if [ ! -x /opt/homebrew/bin/brew ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -27,4 +23,4 @@ Before continuing (skip if you will answer "no" to the 1Password prompt):
 EOF
 read -r -p "Press Enter to run chezmoi "
 
-chezmoi init --source "$DOTFILES" --apply willianjusten
+chezmoi init --source "$DOTFILES" --apply "$@" willianjusten
