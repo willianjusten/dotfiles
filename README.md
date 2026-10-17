@@ -2,21 +2,29 @@
 
 One source of truth for my Macs, applied with [chezmoi](https://chezmoi.io).
 
-## Fresh Mac
+## Set up a Mac
 
-1. Run:
+Works on a new Mac and on one that already has config, repos and credentials.
+
+1. Put the secrets listed under [1Password items](#1password-items) in 1Password first:
+   chezmoi replaces `~/.npmrc`, `~/.yarnrc.yml` and `~/.spoke-env` with their values.
+2. Run:
 
    ```sh
    bash -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
    ```
 
-   It installs the Command Line Tools, Homebrew, chezmoi and 1Password, then pauses.
-2. Open 1Password, sign in to both accounts, and turn on Settings > Developer >
-   "Integrate with 1Password CLI" and "Use the SSH agent". Press Enter in the terminal
-   to run `chezmoi init --apply` and answer its prompts (machine, git emails, 1Password).
-3. Sign in to the App Store, then install the App Store apps:
+   It installs Homebrew (with the Command Line Tools), chezmoi and 1Password if missing, then pauses.
+3. Open 1Password, sign in to both accounts, and turn on Settings > Developer >
+   "Integrate with 1Password CLI". Press Enter to run `chezmoi init` and answer its
+   prompts (machine, git emails, 1Password).
+4. `scripts/backup.sh` then copies every file chezmoi will replace to
+   `~/.dotfiles-backup/<timestamp>/`, with a `changes.diff` of what changes in each
+   (secrets masked). Review it, press Enter to apply, and later move anything you
+   want to keep from the backup into the dotfiles.
+5. Sign in to the App Store, then install the App Store apps:
    `brew bundle --file=~/Developer/dotfiles/Brewfile.mas`
-4. Finish the manual checklist below.
+6. Finish the manual checklist below.
 
 After the first apply, switch the repo remote to SSH to be able to push:
 `git -C ~/Developer/dotfiles remote set-url origin git@github.com:willianjusten/dotfiles.git`
@@ -38,9 +46,10 @@ After the first apply, switch the repo remote to SSH to be able to push:
 
 | Item | Owner |
 |---|---|
-| zsh, git, npm/yarn auth, mise, Ghostty, Cursor settings, SSH agent config | this repo |
-| Secrets (npm token, Spoke workspace tokens, SSH key) | 1Password, read at apply time |
-| Spoke repos and their agent setup | Spoke workspace (`make repos`, `make setup`), run by the clone script |
+| zsh, git, npm/yarn auth, mise, Ghostty, Cursor settings | this repo |
+| Secrets (npm token, Spoke workspace tokens) | 1Password, read at apply time |
+| SSH keys and `~/.ssh/config` | the machine itself, not managed |
+| Spoke repos and their agent setup | Spoke workspace (see its README); chezmoi only adds mise Node pins |
 | Claude Code (`~/.claude`) | [agent-skills](https://github.com/willianjusten/agent-skills), run by a chezmoi script |
 | Chrome, Microsoft To Do | their own account sync |
 | Raycast | see [raycast/README.md](raycast/README.md) |
@@ -50,10 +59,9 @@ After the first apply, switch the repo remote to SSH to be able to push:
 | Reference | Account | Used by |
 |---|---|---|
 | `op://Personal/npm/token` | Personal | `~/.npmrc`, `~/.yarnrc.yml` |
-| `op://Personal/GitHub SSH` (SSH key item) | Personal | SSH agent, git commit signing |
 | `op://Employee/Spoke workspace env/{LINEAR_API_KEY,FIGMA_TOKEN,ASK_CIRCUIT_TOKEN}` | Spoke | `~/.spoke-env` |
 
-Answering "no" to the 1Password prompt skips all of these (no tokens, no commit signing).
+Answering "no" to the 1Password prompt leaves these three files untouched.
 
 ## Manual checklist
 
