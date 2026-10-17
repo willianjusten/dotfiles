@@ -4,8 +4,11 @@
 set -uo pipefail
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Installs and upgrades only; never uninstalls anything missing from the Brewfiles
-status=0
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile" || status=1
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile.{{ .machine }}" || status=1
-exit $status
+# Installs and upgrades only; never uninstalls anything missing from the Brewfiles.
+# A failed entry (e.g. mas before App Store sign-in) only warns: exiting non-zero
+# here would stop chezmoi before it writes any file.
+for brewfile in "{{ .chezmoi.sourceDir }}/Brewfile" "{{ .chezmoi.sourceDir }}/Brewfile.{{ .machine }}"; do
+  if ! brew bundle --file="$brewfile"; then
+    echo "WARNING: some entries in $brewfile failed. Fix them, then run: brew bundle --file=$brewfile" >&2
+  fi
+done
