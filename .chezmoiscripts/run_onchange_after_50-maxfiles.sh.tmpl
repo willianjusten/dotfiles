@@ -1,0 +1,14 @@
+#!/bin/bash
+# plist hash: {{ include "macos/limit.maxfiles.plist" | sha256sum }}
+# launchd's soft maxfiles is 256 and GUI apps (Cursor, editor-started watchers)
+# inherit it, not the shell's ulimit.
+set -euo pipefail
+
+plist_source="{{ .chezmoi.sourceDir }}/macos/limit.maxfiles.plist"
+plist_target="/Library/LaunchDaemons/limit.maxfiles.plist"
+
+plutil -lint "$plist_source"
+sudo install -m 644 -o root -g wheel "$plist_source" "$plist_target"
+sudo launchctl bootout system/limit.maxfiles 2>/dev/null || true
+sudo launchctl bootstrap system "$plist_target"
+echo "maxfiles raised; reboot so every GUI app picks it up"
