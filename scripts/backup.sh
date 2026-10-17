@@ -1,6 +1,6 @@
 #!/bin/bash
 # Run between `chezmoi init` and `chezmoi apply` on a machine that already has config.
-# Copies every file chezmoi would replace into ~/.dotfiles-backup/<timestamp>/ and
+# Copies every file chezmoi would replace or remove into ~/.dotfiles-backup/<timestamp>/ and
 # writes changes.diff (current vs dotfiles, secrets masked) so you can decide what
 # to bring back into the dotfiles afterwards.
 set -euo pipefail
@@ -37,6 +37,16 @@ while IFS= read -r target; do
   changed_files+=("~/$relative_path")
 done < <(chezmoi managed --include files --exclude externals --path-style absolute)
 
+# Files listed in .chezmoiremove are deleted on apply
+while IFS= read -r relative_path; do
+  case "$relative_path" in "" | "#"*) continue ;; esac
+  [ -f "$HOME/$relative_path" ] || continue
+  mkdir -p "$backup_dir/$(dirname "$relative_path")"
+  cp -p "$HOME/$relative_path" "$backup_dir/$relative_path"
+  diff -u --label "current ~/$relative_path" --label "removed by dotfiles" "$HOME/$relative_path" /dev/null | mask_secrets >> "$report" || true
+  changed_files+=("~/$relative_path (removed)")
+done < "$(chezmoi source-path)/.chezmoiremove"
+
 if [ ${#changed_files[@]} -eq 0 ]; then
   echo "chezmoi replaces no existing file; nothing backed up"
   rm -f "$rendered"
@@ -44,7 +54,7 @@ if [ ${#changed_files[@]} -eq 0 ]; then
   exit 0
 fi
 
-echo "Backed up ${#changed_files[@]} file(s) that chezmoi will replace, to $backup_dir:"
+echo "Backed up ${#changed_files[@]} file(s) that chezmoi will replace or remove, to $backup_dir:"
 printf '  %s\n' "${changed_files[@]}"
 echo "What changes in each (lines starting with - exist only in your current file):"
 echo "  less $report"

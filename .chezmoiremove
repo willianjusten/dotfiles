@@ -1,0 +1,4 @@
+# Deleted from the machine on apply; scripts/backup.sh saves a copy first.
+# asdf's global versions file: mise reads it for everything under ~, which would
+# override the Node in dot_config/mise/config.toml and try to build Ruby/Erlang.
+.tool-versions
