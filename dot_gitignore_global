@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Trashes
+.Spotlight-V100
+.TemporaryItems
+.fseventsd
+
+# Editors
+.cursor
+.history
+*.swp
+*~
+
+# Local tool config
+mise.local.toml
+.envrc
+
+# Local agent ticket/spec files (mattpocock skills local tracker)
+.scratch/

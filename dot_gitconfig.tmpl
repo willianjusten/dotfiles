@@ -1,9 +1,25 @@
 [user]
-  name = Willian Justen
-  email = willianjusten@gmail.com
-  initials = wj
+  name = Willian Justen de Vasconcellos
+  email = {{ .personal_email }}
+{{- if .use_1password }}
+  signingkey = {{ onepasswordRead "op://Personal/GitHub SSH/public key" .op_personal_account | trim }}
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+  gpgsign = true
+{{- end }}
+[includeIf "gitdir:~/Developer/github/"]
+  path = ~/.gitconfig-github
+[includeIf "gitdir:~/Developer/spoke/"]
+  path = ~/.gitconfig-spoke
 [core]
-  excludesfiles = ~/.gitignore
+  excludesfile = ~/.gitignore_global
+  fsmonitor = true
+  untrackedCache = true
+[feature]
+  manyFiles = true
 [branch]
   autosetuprebase = always
   sort = -committerdate
@@ -33,7 +49,6 @@
   unstage = reset HEAD --
   rollback = checkout .
   count = rev-list --count HEAD
-  clear-branches = !git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
 [color]
   ui = true
 [color "status"]
@@ -51,11 +66,10 @@
 [init]
   defaultBranch = main
 [fetch]
-	prune = true
+  prune = true
 [push]
   default = current
 [pull]
-  default = current
   rebase = true
 [merge]
   log = true
