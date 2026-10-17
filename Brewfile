@@ -48,5 +48,3 @@ cask "roam"
 cask "twist"
 cask "whatsapp"
 cask "yaak"
-
-mas "Microsoft To Do", id: 1274495053

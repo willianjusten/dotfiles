@@ -1,0 +1,4 @@
+# App Store apps. Not run by chezmoi: `mas install` hangs instead of failing
+# when no Apple ID is signed in. After signing in to the App Store, run:
+#   brew bundle --file=~/Developer/dotfiles/Brewfile.mas
+mas "Microsoft To Do", id: 1274495053

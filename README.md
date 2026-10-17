@@ -14,7 +14,8 @@ One source of truth for my Macs, applied with [chezmoi](https://chezmoi.io).
 2. Open 1Password, sign in to both accounts, and turn on Settings > Developer >
    "Integrate with 1Password CLI" and "Use the SSH agent". Press Enter in the terminal
    to run `chezmoi init --apply` and answer its prompts (machine, git emails, 1Password).
-3. Sign in to the App Store before the Brewfile reaches `mas` entries (or re-run `chezmoi apply`).
+3. Sign in to the App Store, then install the App Store apps:
+   `brew bundle --file=~/Developer/dotfiles/Brewfile.mas`
 4. Finish the manual checklist below.
 
 After the first apply, switch the repo remote to SSH to be able to push:
