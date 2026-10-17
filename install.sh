@@ -1,6 +1,6 @@
 #!/bin/bash
 # Fresh-Mac bootstrap: Homebrew (installs the Command Line Tools) -> 1Password -> chezmoi init --apply.
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
+# bash -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
 # Extra arguments go to `chezmoi init`, e.g. --promptChoice machine=macbook
 set -euo pipefail
 

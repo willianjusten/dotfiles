@@ -7,7 +7,7 @@ One source of truth for my Macs, applied with [chezmoi](https://chezmoi.io).
 1. Run:
 
    ```sh
-   sh -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
+   bash -c "$(curl -fsSL https://raw.githubusercontent.com/willianjusten/dotfiles/main/install.sh)"
    ```
 
    It installs the Command Line Tools, Homebrew, chezmoi and 1Password, then pauses.
