@@ -1,16 +1,13 @@
-# Aliases
-
 # IP addresses
 alias external-ip='curl -4 icanhazip.com'
 alias local-ip='ipconfig getifaddr en0'
 alias flushdns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
-# Folder aliases
-alias dev='~/Developer'
-alias courses='~/Developer/courses'
-alias github='~/Developer/github'
+# Folders
+alias dev='cd ~/Developer'
+alias github='cd ~/Developer/github'
+alias spoke='cd ~/Developer/spoke'
 
-# Command aliases
 alias sz='source ~/.zshrc'
 
 # Show/hide hidden files in Finder

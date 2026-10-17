@@ -1,0 +1,14 @@
+# Load Spoke workspace skills (~/Developer/spoke/.claude/skills) when starting
+# claude anywhere inside the workspace; outside of it, run claude untouched
+claude() {
+  case "$PWD/" in
+    "$HOME/Developer/spoke/"*) command claude --add-dir "$HOME/Developer/spoke" "$@" ;;
+    *) command claude "$@" ;;
+  esac
+}
+
+# Safe-delete (-d) local branches merged into the current one. Skips the
+# current branch (*), branches checked out in worktrees (+) and main/master/develop.
+clearbranches() {
+  git branch --merged | grep -v -E '^[*+]|^ +(main|master|develop)$' | xargs git branch -d
+}

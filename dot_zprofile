@@ -1,0 +1,22 @@
+# PATH lives here, not in .zshenv: macOS runs path_helper from /etc/zprofile,
+# which would reorder anything .zshenv put first.
+
+# Static copy of `brew shellenv`, to avoid spawning brew on every login shell
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+
+typeset -U path
+path=(
+  $HOME/.local/bin
+  /opt/homebrew/opt/libpq/bin
+  /opt/homebrew/bin
+  /opt/homebrew/sbin
+  $path
+)
+export PATH
+
+# OrbStack adds this line itself if missing, so keep it here to avoid drift
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
