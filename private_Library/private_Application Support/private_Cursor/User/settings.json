@@ -1,0 +1,75 @@
+{
+  "editor.inlineSuggest.enabled": true,
+  "files.autoSave": "onFocusChange",
+  "editor.tabSize": 2,
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.renderWhitespace": "all",
+  "editor.quickSuggestions": {
+    "strings": "on",
+  },
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.turbo": true,
+    "**/CVS": true,
+    "**/tmp": true,
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/dist/**": true,
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+  },
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 15,
+  "emmet.syntaxProfiles": {
+    "javascript": "js",
+    "xml": {
+      "attr_quotes": "single",
+    },
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "terminal.integrated.fontSize": 14,
+  "explorer.confirmDelete": false,
+  "editor.suggestSelection": "first",
+  "editor.linkedEditing": true,
+  "extensions.ignoreRecommendations": true,
+  "explorer.confirmDragAndDrop": false,
+  "editor.accessibilitySupport": "off",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "git.ignoreMissingGitWarning": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.wordWrap": "wordWrapColumn",
+  "window.zoomLevel": 1,
+  "workbench.tree.enableStickyScroll": false,
+  "explorer.compactFolders": false,
+  "editor.stickyScroll.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "cursor.cpp.disabledLanguages": ["scminput", "csharp"],
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "window.commandCenter": true,
+  "editor.formatOnSave": true,
+  "svelte.enable-ts-plugin": true,
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.settings.applyToAllProfiles": [
+    "editor.defaultFormatter"
+  ],
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.environmentVariables": [
+
+  ],
+  "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.fontFamily": "Menlo",
+  "window.autoDetectColorScheme": false,
+  "githubPullRequests.pullBranch": "never"
+}

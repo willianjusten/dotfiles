@@ -1,0 +1,16 @@
+anthropic.claude-code
+anysphere.remote-ssh
+bierner.markdown-mermaid
+bradlc.vscode-tailwindcss
+editorconfig.editorconfig
+github.vscode-pull-request-github
+ms-vscode.sublime-keybindings
+naumovs.color-highlight
+oxc.oxc-vscode
+shd101wyy.markdown-preview-enhanced
+svelte.svelte-vscode
+unifiedjs.vscode-mdx
+usernamehw.errorlens
+waderyan.gitblame
+wakatime.vscode-wakatime
+zhuangtongfa.material-theme

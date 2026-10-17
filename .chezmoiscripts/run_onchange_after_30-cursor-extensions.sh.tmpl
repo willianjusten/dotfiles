@@ -1,0 +1,18 @@
+#!/bin/bash
+# extensions.txt hash: {{ include "cursor/extensions.txt" | sha256sum }}
+# Installs listed extensions that are missing; never uninstalls extras.
+set -euo pipefail
+
+cursor_cli="/Applications/Cursor.app/Contents/Resources/app/bin/cursor"
+if [ ! -x "$cursor_cli" ]; then
+  echo "Cursor is not installed, skipping extensions"
+  exit 0
+fi
+
+installed_extensions="$("$cursor_cli" --list-extensions)"
+while read -r extension; do
+  [ -z "$extension" ] && continue
+  if ! grep -qixF "$extension" <<<"$installed_extensions"; then
+    "$cursor_cli" --install-extension "$extension"
+  fi
+done < "{{ .chezmoi.sourceDir }}/cursor/extensions.txt"

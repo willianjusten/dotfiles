@@ -1,0 +1,60 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "alt+cmd+enter",
+    "command": "editor.emmet.action.wrapWithAbbreviation"
+  },
+  {
+    "key": "cmd+k cmd+0",
+    "command": "-editor.unfoldAll",
+    "when": "editorFocus"
+  },
+  {
+    "key": "cmd+j cmd+b",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "cmd+k cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "cmd+j cmd+u",
+    "command": "editor.action.transformToUppercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k cmd+u",
+    "command": "-editor.action.transformToUppercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+j cmd+l",
+    "command": "editor.action.transformToLowercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+k cmd+l",
+    "command": "-editor.action.transformToLowercase",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "cmd+l",
+    "command": "composerMode.chat"
+  },
+  {
+    "key": "cmd+k",
+    "command": "composerMode.edit"
+  },
+  {
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\u001b\r"
+    },
+    "when": "terminalFocus"
+  }
+]
