@@ -1,0 +1,7 @@
+{{ if .use_1password -}}
+//registry.npmjs.org/:_authToken={{ onepasswordRead "op://Personal/npm/token" .op_personal_account }}
+{{ end -}}
+@getcircuit:registry=https://registry.npmjs.org/
+init-author-email={{ .personal_email }}
+init-author-name=Willian Justen
+init-author-url=https://willianjusten.com.br

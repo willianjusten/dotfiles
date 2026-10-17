@@ -1,0 +1,5 @@
+{{- if .use_1password -}}
+npmRegistries:
+  "https://registry.yarnpkg.com":
+    npmAuthToken: {{ onepasswordRead "op://Personal/npm/token" .op_personal_account | quote }}
+{{ end -}}
