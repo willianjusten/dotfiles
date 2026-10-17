@@ -1,7 +1,7 @@
 {{- $machine := promptChoiceOnce . "machine" "Which Mac is this" (list "studio" "macbook") -}}
 {{- $personalEmail := promptStringOnce . "personal_email" "Personal git email" -}}
 {{- $workEmail := promptStringOnce . "work_email" "Spoke git email" -}}
-{{- $use1password := promptBoolOnce . "use_1password" "Read secrets and the SSH key from 1Password (app signed in, CLI integration on)" -}}
+{{- $use1password := promptBoolOnce . "use_1password" "Read secrets and the SSH key from 1Password (app signed in with CLI integration on)" -}}
 {{- $opPersonalAccount := "" -}}
 {{- $opSpokeAccount := "" -}}
 {{- if $use1password -}}
