@@ -16,24 +16,30 @@ mask_secrets() {
 }
 
 rendered="$backup_dir/.rendered"
+trap 'rm -f "$rendered"' EXIT
 changed_files=()
 while IFS= read -r target; do
   # New files replace nothing, so there is nothing to back up
   [ -f "$target" ] || continue
-  chezmoi cat "$target" > "$rendered"
+  relative_path="${target#"$HOME"/}"
+  if ! chezmoi cat "$target" > "$rendered"; then
+    echo "Could not build ~/$relative_path (often a missing 1Password item, see the error above)." >&2
+    echo "Nothing was backed up or applied. Fix it and run install.sh again." >&2
+    rm -rf "$backup_dir"
+    exit 1
+  fi
   if cmp -s "$target" "$rendered"; then
     continue
   fi
-  relative_path="${target#"$HOME"/}"
   mkdir -p "$backup_dir/$(dirname "$relative_path")"
   cp -p "$target" "$backup_dir/$relative_path"
   diff -u --label "current ~/$relative_path" --label "dotfiles ~/$relative_path" "$target" "$rendered" | mask_secrets >> "$report" || true
   changed_files+=("~/$relative_path")
 done < <(chezmoi managed --include files --exclude externals --path-style absolute)
-rm -f "$rendered"
 
 if [ ${#changed_files[@]} -eq 0 ]; then
   echo "chezmoi replaces no existing file; nothing backed up"
+  rm -f "$rendered"
   rmdir "$backup_dir"
   exit 0
 fi
