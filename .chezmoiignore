@@ -1,0 +1,14 @@
+README.md
+install.sh
+Brewfile
+Brewfile.*
+cursor/
+raycast/
+macos/
+scripts/
+
+{{- if not .use_1password }}
+.ssh/config
+.config/1Password
+.spoke-env
+{{- end }}

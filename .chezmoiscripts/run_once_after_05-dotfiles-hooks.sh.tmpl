@@ -1,0 +1,4 @@
+#!/bin/bash
+# The repo is public: the gitleaks pre-commit hook must be active before any commit
+set -euo pipefail
+git -C "{{ .chezmoi.sourceDir }}" config core.hooksPath .githooks
