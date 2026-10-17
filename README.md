@@ -18,13 +18,17 @@ Works on a new Mac and on one that already has config, repos and credentials.
 3. Open 1Password, sign in to both accounts, and turn on Settings > Developer >
    "Integrate with 1Password CLI". Press Enter to run `chezmoi init` and answer its
    prompts (machine, git emails, 1Password).
-4. `scripts/backup.sh` then copies every file chezmoi will replace to
+4. `scripts/backup.sh` then copies every file chezmoi will replace or remove to
    `~/.dotfiles-backup/<timestamp>/`, with a `changes.diff` of what changes in each
    (secrets masked). Review it, press Enter to apply, and later move anything you
    want to keep from the backup into the dotfiles.
 5. Sign in to the App Store, then install the App Store apps:
    `brew bundle --file=~/Developer/dotfiles/Brewfile.mas`
-6. Finish the manual checklist below.
+6. On a Mac that had the old setup, open a new shell and run `scripts/cleanup.sh`.
+   It removes nvm, asdf, rbenv and Volta (once mise provides Node), rebuildable
+   caches, and unused apps and Homebrew packages, asking before each group and
+   showing how much space it frees. Docker volumes and personal files are never touched.
+7. Finish the manual checklist below.
 
 After the first apply, switch the repo remote to SSH to be able to push:
 `git -C ~/Developer/dotfiles remote set-url origin git@github.com:willianjusten/dotfiles.git`
@@ -66,11 +70,29 @@ Answering "no" to the 1Password prompt leaves these three files untouched.
 ## Manual checklist
 
 - System Settings > Spotlight > Search Privacy: add `~/Developer`, `~/.yarn`, `~/.npm`, `~/.cache`
-- Static wallpaper (no Aerials)
+- Static wallpaper (no Aerials); then remove the downloaded Aerial videos in Settings > Wallpaper
+- Login items and background agents (System Settings > General > Login Items): remove
+  Loom, Unsplash Wallpapers and Logi RightSight (without a Logi camera); turn off Adobe's
+  `ccxprocess` if Lightroom is occasional; turn off unused Spoken Content / Siri voices
+- Docker Desktop to OrbStack (keep Docker Desktop until the tests pass;
+  `docker context use desktop-linux` switches back):
+  1. Dump any local DB data you need (`docker volume ls`)
+  2. `brew install --cask orbstack`, start it and approve its admin prompt
+     (it repoints `/var/run/docker.sock`, which testcontainers uses)
+  3. In `~/.docker/config.json`, change `"credsStore": "desktop"` to `"osxkeychain"`
+     and keep the `credHelpers` gcloud entry: `docker-credential-desktop` goes away with Docker Desktop
+  4. `gcloud auth login` and `gcloud auth configure-docker europe-west2-docker.pkg.dev`
+     (the Firebase emulator image is private)
+  5. In backend-services, run one integration suite per container type: the Firebase
+     emulator (`@getcircuit/firestore-test`), Postgres (engine) and Elasticsearch + Redis (indexer)
+  6. Uninstall Docker Desktop (removes `Docker.raw`)
+- Network: add a secondary DNS (1.0.0.1 or 8.8.8.8)
+- Lightroom: purge the Camera Raw and Lightroom caches in its preferences
+- `~/Downloads`: move ID scans and bank statements into 1Password; keep the Emergency Kit offline
 - 1Password: Settings > Autofill > Set up macOS AutoFill; then untick "Passwords" in
   System Settings > General > AutoFill & Passwords (keep iCloud Keychain sync on)
 - Chrome, per profile: 1Password extension, turn off Google Password Manager saving,
-  Memory Saver on
+  Memory Saver on; delete unused profiles only after exporting their passwords
 - Spoke Chat: install from Spoke (not on Homebrew)
 - Raycast: Cloud Sync or import `.rayconfig`
 - Log in to `gh`, `gcloud` (`gcloud auth login`, `gcloud auth application-default login`),
