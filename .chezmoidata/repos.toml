@@ -1,0 +1,24 @@
+# Cloned by .chezmoiscripts/run_onchange_after_70-clone-repos.sh when missing.
+# Existing checkouts are never touched.
+
+[repos]
+# Passed to the Spoke workspace's `make repos REPOS="..."`, which owns the catalog
+spoke = [
+  "admin-panel",
+  "ai-cli",
+  "backend-services",
+  "domain",
+  "internal-apps",
+  "knowledge",
+  "marketing-app",
+  "monorepo",
+  "skills",
+  "web-apps",
+  "web-packages",
+]
+
+# Cloned into ~/Developer/github/<name>. The dotfiles repo itself is cloned by
+# install.sh into ~/Developer/dotfiles, so it is not listed here.
+[repos.personal]
+"nba-next" = "git@github.com:willianjusten/nba-nextjs.git"
+"willianjusten.com.br" = "git@github.com:willianjusten/willianjusten.com.br.git"

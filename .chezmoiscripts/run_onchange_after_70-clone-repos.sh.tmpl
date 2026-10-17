@@ -1,0 +1,42 @@
+#!/bin/bash
+# repos.toml hash: {{ include ".chezmoidata/repos.toml" | sha256sum }}
+# Clones missing repos only; never touches existing checkouts. Exits non-zero
+# on any failure so chezmoi re-runs it on the next apply.
+set -uo pipefail
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+failures=()
+
+personal_dir="$HOME/Developer/github"
+mkdir -p "$personal_dir"
+{{ range $name, $url := .repos.personal -}}
+if [ ! -d "$personal_dir/{{ $name }}" ]; then
+  git clone {{ $url | quote }} "$personal_dir/{{ $name }}" || failures+=({{ $name | quote }})
+fi
+{{ end }}
+# The Spoke workspace repo owns the Spoke repo catalog and setup (see its README).
+# chezmoi already created the folder for mise.local.toml, so this follows the
+# workspace's "existing folder" flow instead of a plain clone.
+workspace="$HOME/Developer/spoke"
+if [ ! -d "$workspace/.git" ]; then
+  mkdir -p "$workspace"
+  git -C "$workspace" init --quiet
+  git -C "$workspace" remote add origin git@github.com:getcircuit/workspace.git
+  if git -C "$workspace" fetch --quiet origin main; then
+    git -C "$workspace" checkout --quiet -f -B main origin/main
+  else
+    failures+=("workspace")
+  fi
+fi
+
+if [ -f "$workspace/Makefile" ]; then
+  cd "$workspace"
+  mise exec -- make repos REPOS="{{ .repos.spoke | join " " }}" || failures+=("make repos")
+  mise exec -- make setup || failures+=("make setup")
+  "{{ .chezmoi.sourceDir }}/scripts/spoke-mise-pins.sh" "$workspace" || failures+=("spoke mise pins")
+fi
+
+if [ ${#failures[@]} -gt 0 ]; then
+  echo "Failed: ${failures[*]}" >&2
+  exit 1
+fi
