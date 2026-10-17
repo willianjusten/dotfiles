@@ -1,22 +1,8 @@
 # Cloned by .chezmoiscripts/run_onchange_after_70-clone-repos.sh when missing.
-# Existing checkouts are never touched.
+# Existing checkouts are never touched. Spoke repos are not listed: the Spoke
+# workspace manages them (see its README).
 
 [repos]
-# Passed to the Spoke workspace's `make repos REPOS="..."`, which owns the catalog
-spoke = [
-  "admin-panel",
-  "ai-cli",
-  "backend-services",
-  "domain",
-  "internal-apps",
-  "knowledge",
-  "marketing-app",
-  "monorepo",
-  "skills",
-  "web-apps",
-  "web-packages",
-]
-
 # Cloned into ~/Developer/github/<name>. The dotfiles repo itself is cloned by
 # install.sh into ~/Developer/dotfiles, so it is not listed here.
 [repos.personal]
