@@ -1,0 +1,9 @@
+[tools]
+node = "24"
+yarn = "4.17"
+
+[settings]
+# .node-version and package.json "packageManager"
+idiomatic_version_file_enable_tools = ["node", "yarn"]
+# Spoke repos get a generated mise.local.toml (scripts/spoke-mise-pins.sh)
+trusted_config_paths = ["~/Developer/spoke"]

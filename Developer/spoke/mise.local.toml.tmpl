@@ -1,0 +1,6 @@
+# Env for every Spoke repo below this folder (mise walks up the tree).
+# Gitignored by the workspace repo and by ~/.gitignore_global.
+[env]
+GOOGLE_APPLICATION_CREDENTIALS = "{{ .chezmoi.homeDir }}/Developer/spoke/backend-services/node_modules/@local/static-files/service-accounts/dev.json"
+SERVICE_ACCOUNTS_PATH = "{{ .chezmoi.homeDir }}/Developer/spoke/backend-services/node_modules/@local/static-files/service-accounts"
+CLOUDSDK_PYTHON = "/opt/homebrew/bin/python3"

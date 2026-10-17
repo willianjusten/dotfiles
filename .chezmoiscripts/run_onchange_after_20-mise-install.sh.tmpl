@@ -1,0 +1,4 @@
+#!/bin/bash
+# mise config hash: {{ include "dot_config/mise/config.toml" | sha256sum }}
+set -euo pipefail
+/opt/homebrew/bin/mise install
