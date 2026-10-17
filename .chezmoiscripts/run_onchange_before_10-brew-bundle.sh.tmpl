@@ -1,0 +1,11 @@
+#!/bin/bash
+# Brewfile hash: {{ include "Brewfile" | sha256sum }}
+# Brewfile.{{ .machine }} hash: {{ include (printf "Brewfile.%s" .machine) | sha256sum }}
+set -uo pipefail
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Installs and upgrades only; never uninstalls anything missing from the Brewfiles
+status=0
+brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile" || status=1
+brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile.{{ .machine }}" || status=1
+exit $status
