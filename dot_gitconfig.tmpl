@@ -1,15 +1,6 @@
 [user]
   name = Willian Justen de Vasconcellos
   email = {{ .personal_email }}
-{{- if .use_1password }}
-  signingkey = {{ onepasswordRead "op://Personal/GitHub SSH/public key" .op_personal_account | trim }}
-[gpg]
-  format = ssh
-[gpg "ssh"]
-  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-[commit]
-  gpgsign = true
-{{- end }}
 [includeIf "gitdir:~/Developer/github/"]
   path = ~/.gitconfig-github
 [includeIf "gitdir:~/Developer/spoke/"]
