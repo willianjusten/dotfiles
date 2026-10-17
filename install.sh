@@ -14,13 +14,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install chezmoi
 brew install --cask 1password 1password-cli
 
-cat <<'EOF'
+if [ -t 0 ]; then
+  cat <<'EOF'
 
 Before continuing (skip if you will answer "no" to the 1Password prompt):
   1. Open 1Password and sign in to both accounts
   2. Settings > Developer: turn on "Integrate with 1Password CLI" and "Use the SSH agent"
 
 EOF
-read -r -p "Press Enter to run chezmoi "
+  read -r -p "Press Enter to run chezmoi "
+fi
 
 chezmoi init --source "$DOTFILES" --apply "$@" willianjusten
