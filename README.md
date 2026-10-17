@@ -99,7 +99,7 @@ Answering "no" to the 1Password prompt leaves these three files untouched.
 - Spoke Chat: install from Spoke (not on Homebrew)
 - Raycast: Cloud Sync or import `.rayconfig`
 - Log in to `gh`, `gcloud` (`gcloud auth login`, `gcloud auth application-default login`),
-  `flyctl`, `stripe`, `ngrok`, OrbStack
+  `flyctl`, `ngrok`, OrbStack
 - Reboot once so the maxfiles limit applies to every app
 
 ## Verify

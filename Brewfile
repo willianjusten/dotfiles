@@ -1,5 +1,4 @@
 # Shared by every Mac. Machine-only apps go in Brewfile.<machine>.
-tap "stripe/stripe-cli"
 
 # Dotfiles and runtimes
 brew "chezmoi"
@@ -19,7 +18,6 @@ brew "git"
 brew "htop"
 brew "libpq"
 brew "python@3.14"
-brew "stripe/stripe-cli/stripe"
 brew "tree"
 
 # Media tooling
