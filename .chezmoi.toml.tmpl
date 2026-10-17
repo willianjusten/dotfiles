@@ -2,10 +2,8 @@
 {{- $personalEmail := promptStringOnce . "personal_email" "Personal git email" -}}
 {{- $workEmail := promptStringOnce . "work_email" "Spoke git email" -}}
 {{- $use1password := promptBoolOnce . "use_1password" "Read secrets from 1Password (app signed in with CLI integration on)" -}}
-{{- $opPersonalAccount := "" -}}
 {{- $opSpokeAccount := "" -}}
 {{- if $use1password -}}
-{{-   $opPersonalAccount = promptStringOnce . "op_personal_account" "Personal 1Password sign-in address" "my.1password.com" -}}
 {{-   $opSpokeAccount = promptStringOnce . "op_spoke_account" "Spoke 1Password sign-in address" "spokedelivery.1password.com" -}}
 {{- end -}}
 
@@ -16,5 +14,4 @@ machine = {{ $machine | quote }}
 personal_email = {{ $personalEmail | quote }}
 work_email = {{ $workEmail | quote }}
 use_1password = {{ $use1password }}
-op_personal_account = {{ $opPersonalAccount | quote }}
 op_spoke_account = {{ $opSpokeAccount | quote }}

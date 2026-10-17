@@ -15,7 +15,7 @@ Works on a new Mac and on one that already has config, repos and credentials.
    ```
 
    It installs Homebrew (with the Command Line Tools), chezmoi and 1Password if missing, then pauses.
-3. Open 1Password, sign in to both accounts, and turn on Settings > Developer >
+3. Open 1Password, sign in to the Spoke account, and turn on Settings > Developer >
    "Integrate with 1Password CLI". Press Enter to run `chezmoi init` and answer its
    prompts (machine, git emails, 1Password).
 4. `scripts/backup.sh` then copies every file chezmoi will replace or remove to
@@ -62,7 +62,7 @@ After the first apply, switch the repo remote to SSH to be able to push:
 
 | Reference | Account | Used by |
 |---|---|---|
-| `op://Personal/npm/token` | Personal | `~/.npmrc`, `~/.yarnrc.yml` |
+| `op://Employee/Spoke workspace env/NPM_TOKEN` | Spoke | `~/.npmrc`, `~/.yarnrc.yml` |
 | `op://Employee/Spoke workspace env/{LINEAR_API_KEY,FIGMA_TOKEN,ASK_CIRCUIT_TOKEN}` | Spoke | `~/.spoke-env` |
 
 Answering "no" to the 1Password prompt leaves these three files untouched.

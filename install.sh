@@ -21,7 +21,7 @@ if [ -t 0 ]; then
   cat <<'EOF'
 
 Before continuing (skip if you will answer "no" to the 1Password prompt):
-  1. Open 1Password and sign in to both accounts
+  1. Open 1Password and sign in to the Spoke account
   2. Settings > Developer: turn on "Integrate with 1Password CLI"
 
 EOF
